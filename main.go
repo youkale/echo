@@ -44,7 +44,7 @@ func main() {
 			i := rand.Intn(len(b))
 			w.Write(b[i])
 		} else {
-			req := Request{
+			req := &Request{
 				URL:    p,
 				Host:   r.Host,
 				Method: r.Method,
