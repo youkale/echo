@@ -20,8 +20,6 @@ type Request struct {
 	Body   string              `json:"body"`
 }
 
-var logger = log.Default()
-
 var addr string
 
 func init() {
@@ -38,7 +36,7 @@ var (
 
 func main() {
 	flag.Parse()
-	logger.Print("listen port:", addr)
+	log.Printf("Listen at %s", addr)
 	rand.Seed(time.Now().UnixNano())
 	http.ListenAndServe(addr, http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		p := r.RequestURI
@@ -60,7 +58,7 @@ func main() {
 			}
 
 			if res, err := json.Marshal(req); nil == err {
-				logger.Print("rec: " + string(res))
+				log.Printf("receive: %s", res)
 				w.Write(res)
 			}
 		}
